@@ -1,15 +1,20 @@
 <template>
-	<!-- v-for -  директива для отрисовки списка элементов на основе массива данных  -->
-	<!-- posts — исходный массив, а post — ссылка на текущий элемент массива -->
-	<div class="post" v-for="post in posts" :key="post">
-		<!-- динамически забираем title у post -->
-		<div> <strong> Название: </strong>{{ post.title }}</div>
-		<div> <strong> Описание: </strong>{{ post.body }}</div>
+	<div>
+		<h3>Список пользователей</h3>
+		<!-- v-for -  директива для отрисовки списка элементов на основе массива данных  -->
+		<!-- posts — исходный массив, а post — ссылка на текущий элемент массива -->
+		<post-item v-for="post in posts" :key="post" :post="post" />
 	</div>
+
+
 </template>
 
 <script>
+import PostItem from '@/components/PostItem.vue'
 export default {
+	components: {
+		PostItem
+	},
 	//аргументы props для остов из массива в App 
 	props: {
 		//пишем то что ожидаем на входе - посты
