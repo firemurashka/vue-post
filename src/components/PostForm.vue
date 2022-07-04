@@ -9,14 +9,19 @@
 		<input v-model="post.title" class="input" placeholder="Название" type="text">
 		<input v-model="post.body" class="input" placeholder="Описание" type="text">
 		<!-- обработчик события кнопки и вызов функции createPost -->
-		<button class="btn" @click="createPost">Создать</button>
+		<my-button class="btn__post" @click="createPost"> Создать </my-button>
 	</form>
 
 </template>
 
 <script>
-export default {
+//импортирование кнопки
+import MyButton from '@/components/UI/MyButton.vue'
 
+export default {
+	components: {
+		MyButton
+	},
 	data() {
 		return {
 			//объявляем модель post с полями
@@ -30,8 +35,6 @@ export default {
 	methods: {
 		/* функция обработки кнопки */
 		createPost() {
-
-
 			/* объект создавать не надо
 				объект новый пост newPost
 				const newPost = {
@@ -83,13 +86,7 @@ form {
 	outline: none;
 }
 
-
-.btn {
-	margin: 15px 0px 0px 0px;
+.btn__post {
 	align-self: flex-end;
-	padding: 10px 15px;
-	background: none;
-	color: teal;
-	border: 2px solid teal;
 }
 </style>

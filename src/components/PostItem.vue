@@ -1,14 +1,25 @@
 <template>
 
 	<div class="post">
-		<!-- динамически забираем title у post -->
-		<div> <strong> Название: </strong>{{ post.title }}</div>
-		<div> <strong> Описание: </strong>{{ post.body }}</div>
+		<div>
+			<!-- динамически забираем title у post -->
+			<div> <strong> Название: </strong>{{ post.title }}</div>
+			<div> <strong> Описание: </strong>{{ post.body }}</div>
+		</div>
+		<div class="post__btns">
+			<my-button> Удалить </my-button>
+
+		</div>
 	</div>
 </template>
 
 <script>
+import MyButton from '@/components/UI/MyButton.vue'
+
 export default {
+	components: {
+		MyButton
+	},
 	//аргументы props для остов из массива в App 
 	props: {
 		//пишем то что ожидаем на входе - пост
@@ -23,4 +34,14 @@ export default {
 </script>
 
 <style scoped>
+.post {
+	padding: 15px;
+	border: 2px solid teal;
+	margin: 15px 0px 0px 0px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+
+}
 </style>

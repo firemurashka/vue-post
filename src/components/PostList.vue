@@ -30,9 +30,4 @@ export default {
 
 <!-- scoped - стили аботают только внитри этого компонента -->
 <style scoped>
-.post {
-	padding: 15px;
-	border: 2px solid teal;
-	margin: 15px 0px 0px 0px;
-}
 </style>
