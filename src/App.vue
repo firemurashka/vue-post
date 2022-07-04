@@ -1,10 +1,14 @@
 <template>
 	<div class="app">
-		<form>
+		<!-- @submit.prevent отмена стандартного поведения браузера - перезагрузки (prevent-модификатор)-->
+		<form @submit.prevent>
 			<h4>Создание поста</h4>
-			<input class="input" placeholder="Название" type="text">
-			<input class="input" placeholder="Описание" type="text">
-			<button class="btn">Создать</button>
+			<!-- v-bind или просто : - директива для привязки данных -->
+			<!--  @input обработчик события input который вызывает функцию inputTitle -->
+			<input :value="title" @input="title = $event.target.value" class="input" placeholder="Название" type="text">
+			<input :value="body" @input="body = $event.target.value" class="input" placeholder="Описание" type="text">
+			<!-- обработчик события кнопки и вызов функции createPost -->
+			<button class="btn" @click="createPost">Создать</button>
 		</form>
 
 
@@ -28,13 +32,39 @@ export default {
 				{ id: 1, title: 'JavaScript 1', body: 'Описание поста 1' },
 				{ id: 2, title: 'JavaScript 2', body: 'Описание поста 2' },
 				{ id: 3, title: 'JavaScript 3', body: 'Описание поста 3' },
-				{ id: 4, title: 'JavaScript 4', body: 'Описание поста 4' },
-				{ id: 5, title: 'JavaScript 5', body: 'Описание поста 5' },
-				{ id: 6, title: 'JavaScript 6', body: 'Описание поста 6' },
-				{ id: 7, title: 'JavaScript 7', body: 'Описание поста 7' },
-			]
+
+			],
+			//еще 2 модели
+			title: '',
+			body: ''
 		}
 
+	},
+	methods: {
+		/* функция обработки кнопки */
+		createPost() {
+			//объект новый пост newPost
+			const newPost = {
+				//уникальный id с текущей датой
+				id: Date.now(),
+				//title получаем из модели
+				title: this.title,
+				//body получаем из модели
+				body: this.body,
+			}
+			//добавляем новый пост newPost в массив posts
+			this.posts.push(newPost);
+			//поле добавления поста - очищаем форму штзге
+			this.title = '',
+				this.body = ''
+		},
+		/* функция по забору значения из input
+		по-умолчанию параметром эти обработчики получают event
+		inputTitle(event) {
+		this.title = event.target.value;
+		вместо этой функции пишем сразу в обработчике input:
+		 @input="title=$event.target.value"
+		} */
 	}
 
 }
