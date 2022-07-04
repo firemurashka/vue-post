@@ -14,12 +14,9 @@
 </template>
 
 <script>
-import MyButton from '@/components/UI/MyButton.vue'
 
 export default {
-	components: {
-		MyButton
-	},
+
 	//аргументы props для остов из массива в App 
 	props: {
 		//пишем то что ожидаем на входе - пост

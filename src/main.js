@@ -1,4 +1,15 @@
-import { createApp } from 'vue'
+import {
+    createApp
+} from 'vue'
 import App from './App.vue'
+//ипортируем сюда массив UI компонентов
+import components from '@/components/UI';
 
-createApp(App).mount('#app')
+
+const app = createApp(App)
+    //глобальная регистрация UI компонентов
+components.forEach(component => {
+    app.component(component.name, component)
+})
+
+app.mount('#app')

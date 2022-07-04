@@ -15,13 +15,8 @@
 </template>
 
 <script>
-//импортирование кнопки
-import MyButton from '@/components/UI/MyButton.vue'
-
 export default {
-	components: {
-		MyButton
-	},
+
 	data() {
 		return {
 			//объявляем модель post с полями
@@ -88,5 +83,6 @@ form {
 
 .btn__post {
 	align-self: flex-end;
+	margin: 15px 0px 0px 0px;
 }
 </style>
