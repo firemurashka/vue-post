@@ -1,5 +1,13 @@
 <template>
-	<div>
+	<div class="app">
+		<form>
+			<h4>Создание поста</h4>
+			<input class="input" placeholder="Название" type="text">
+			<input class="input" placeholder="Описание" type="text">
+			<button class="btn">Создать</button>
+		</form>
+
+
 		<!-- v-for -  директива для отрисовки списка элементов на основе массива данных  -->
 		<!-- posts — исходный массив, а post — ссылка на текущий элемент массива -->
 		<div class="post" v-for="post in posts" :key="post">
@@ -24,8 +32,6 @@ export default {
 				{ id: 5, title: 'JavaScript 5', body: 'Описание поста 5' },
 				{ id: 6, title: 'JavaScript 6', body: 'Описание поста 6' },
 				{ id: 7, title: 'JavaScript 7', body: 'Описание поста 7' },
-
-
 			]
 		}
 
@@ -39,6 +45,33 @@ export default {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
+
+.app {
+	padding: 20px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+.input {
+	width: 100%;
+	border: 1px solid teal;
+	margin: 15px 0px 0px 0px;
+	padding: 10px 15px;
+	outline: none;
+}
+
+
+.btn {
+	margin: 15px 0px 0px 0px;
+	align-self: flex-end;
+	padding: 10px 15px;
+	background: none;
+	color: teal;
+	border: 2px solid teal;
 }
 
 .post {
