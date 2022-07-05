@@ -4,12 +4,13 @@
 	</button>
 </template>
 
-
 <script>
 export default {
+	//задаем названиекомпонента  MyButton
 	name: "my-button"
 }
 </script>
+
 <style>
 .btn {
 	align-self: flex-end;

@@ -6,8 +6,8 @@
 		<!--  @input обработчик события input который вызывает функцию inputTitle -->
 		<!-- post.title - обращаемся не на прямую к title а забираем его из объекта post -->
 		<!--:value="post.title" @input="post.title = $event.target.value"  заменяем на v-model="post.title" -->
-		<input v-model="post.title" class="input" placeholder="Название" type="text">
-		<input v-model="post.body" class="input" placeholder="Описание" type="text">
+		<my-input v-model="post.title" placeholder="Название" type="text" />
+		<my-input v-model="post.body" placeholder="Описание" type="text" />
 		<!-- обработчик события кнопки и вызов функции createPost -->
 		<my-button class="btn__post" @click="createPost"> Создать </my-button>
 	</form>
@@ -73,13 +73,6 @@ form {
 	flex-direction: column;
 }
 
-.input {
-	width: 100%;
-	border: 1px solid teal;
-	margin: 15px 0px 0px 0px;
-	padding: 10px 15px;
-	outline: none;
-}
 
 .btn__post {
 	align-self: flex-end;
