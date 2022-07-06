@@ -7,7 +7,7 @@
 		<!-- компонент -PostList-->
 		<!-- :posts= - привязываем посты к нашему компоненту, в данном случае они улетят как пропсы  -->
 		<!-- "posts" -  и указываем какое зачение мы привязываем в данном случае посты в поле data -->
-		<post-list :posts="posts" />
+		<post-list @remove="removePost" :posts="posts" />
 
 	</div>
 </template>
@@ -43,6 +43,9 @@ export default {
 			//добавляем post в массив posts те мы его от ребенка получили и в массив опракинули
 			this.posts.push(post);
 		},
+		removePost(post) {
+			this.posts = this.posts.filter(p => p.id !== post.id)
+		}
 		/* функция по забору значения из input
 		по-умолчанию параметром эти обработчики получают event
 		inputTitle(event) {
