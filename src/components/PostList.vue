@@ -3,7 +3,8 @@
 		<h3>Список пользователей</h3>
 		<!-- v-for -  директива для отрисовки списка элементов на основе массива данных  -->
 		<!-- posts — исходный массив, а post — ссылка на текущий элемент массива -->
-		<post-item v-for="post in posts" :key="post" :post="post" />
+		<!-- отдаем post наверх -->
+		<post-item v-for="post in posts" :key="post.id" @click="$emit('remove', post)" :post="post" />
 	</div>
 
 

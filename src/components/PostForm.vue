@@ -6,6 +6,7 @@
 		<!--  @input обработчик события input который вызывает функцию inputTitle -->
 		<!-- post.title - обращаемся не на прямую к title а забираем его из объекта post -->
 		<!--:value="post.title" @input="post.title = $event.target.value"  заменяем на v-model="post.title" -->
+		<!--  v-model:value="post.title"  связывание с атрибутом-->
 		<my-input v-model="post.title" placeholder="Название" type="text" />
 		<my-input v-model="post.body" placeholder="Описание" type="text" />
 		<!-- обработчик события кнопки и вызов функции createPost -->

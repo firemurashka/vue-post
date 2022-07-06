@@ -6,7 +6,6 @@
 
 <script>
 export default {
-	//задаем названиекомпонента  MyButton
 	name: "my-button"
 }
 </script>

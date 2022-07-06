@@ -1,6 +1,6 @@
 <template>
 	<!-- присоединяем к input нашу modelValue с помощью v-bind, v-on - вешаем обработчик события input-->
-	<input class="input" :value="modelValue" @input="updateInput" type="text">
+	<input class="input" :modelValue="value" @input="updateInput" type="text">
 </template>
 
 
