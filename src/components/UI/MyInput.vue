@@ -1,12 +1,22 @@
 <template>
-	<input class="input" type="text">
+	<!-- присоединяем к input нашу modelValue с помощью v-bind, v-on - вешаем обработчик события input-->
+	<input class="input" :value="modelValue" @input="updateInput" type="text">
 </template>
 
 
 <script>
 export default {
 	//задаем названиекомпонента  MyInput
-	name: "my-input"
+	name: "my-input",
+	//принимаем modelValue с помощью props
+	props: {
+		modelValue: [String, Number]
+	},
+	methods: {
+		updateInput(event) {
+			this.$emit('update:modelValue', event.target.value)
+		}
+	}
 }
 </script>
 <style>
