@@ -1,12 +1,14 @@
 <template>
-	<div>
+	<!-- условная отрисовка v-if -->
+	<div v-if="posts.lenght > 0">
 		<h3>Список пользователей</h3>
 		<!-- v-for -  директива для отрисовки списка элементов на основе массива данных  -->
 		<!-- posts — исходный массив, а post — ссылка на текущий элемент массива -->
 		<!-- отдаем post наверх -->
-		<post-item v-for="post in posts" :key="post.id" @click="$emit('remove', post)" :post="post" />
+		<!-- remove - событие, отдаем событие наверх-->
+		<post-item v-for="post in posts" :key="post.id" @remove="$emit('remove', post)" :post="post" />
 	</div>
-
+	<h2 v-else style="color:blue">Список пользователей пуст</h2>
 
 </template>
 

@@ -43,6 +43,7 @@ export default {
 			//добавляем post в массив posts те мы его от ребенка получили и в массив опракинули
 			this.posts.push(post);
 		},
+		//прослушиваем событие remove  с параметром post кот мы опракидывали в emit в postlist
 		removePost(post) {
 			this.posts = this.posts.filter(p => p.id !== post.id)
 		}
