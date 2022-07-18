@@ -2,6 +2,8 @@
 	<!--главный компонент -App-->
 	<div class="app">
 		<h1>Страница с постами</h1>
+		<my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
+
 		<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
 		<my-dialog v-model:show="dialogVisible">
 			<!-- компонент -PostForm-->
@@ -12,15 +14,16 @@
 		<!-- компонент -PostList-->
 		<!-- :posts= - привязываем посты к нашему компоненту, в данном случае они улетят как пропсы  -->
 		<!-- "posts" -  и указываем какое зачение мы привязываем в данном случае посты в поле data -->
-		<post-list @remove="removePost" :posts="posts" />
-
+		<post-list @remove="removePost" :posts="posts" v-if="!isPostsLoading" />
+		<div v-else>Идет загрузка...</div>
 	</div>
 </template>
 
 <script>
 /* импортирование компонентов */
-import PostList from "@/components/PostList"
-import PostForm from "@/components/PostForm"
+import PostList from "@/components/PostList";
+import PostForm from "@/components/PostForm";
+import axios from 'axios';
 
 export default {
 	/* регистрация компонентов в поле components */
@@ -31,14 +34,12 @@ export default {
 		return {
 			//массив постов
 			posts: [
-				{ id: 1, title: 'JavaScript 1', body: 'Описание поста 1' },
-				{ id: 2, title: 'JavaScript 2', body: 'Описание поста 2' },
-				{ id: 3, title: 'JavaScript 3', body: 'Описание поста 3' },
 			],
 			//еще 2 модели
 			//title: '',
 			//body: ''
 			dialogVisible: false,
+			isPostsLoading: false,
 		}
 	},
 	methods: {
@@ -61,7 +62,27 @@ export default {
 		} */
 		showDialog() {
 			this.dialogVisible = true;
+		},
+		async fetchPosts() {
+			try {
+				this.isPostsLoading = true;
+				//setTimeout - задержка показа постов 
+				setTimeout(async () => {
+					//делаем запрос на сервер и ответ помешаем в переменную response
+					const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+					this.posts = response.data;
+					this.isPostsLoading = false;
+				}, 1000);
+
+			} catch (e) {
+				//если произошла ошибка будем выводить в alert
+				alert('Ошибка')
+			}
 		}
+	},
+	//хук mounted в нем реализуем динамическую подгрузку постов
+	mounted() {
+		this.fetchPosts();
 	}
 }
 </script>
