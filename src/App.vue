@@ -1,9 +1,14 @@
 <template>
 	<!--главный компонент -App-->
 	<div class="app">
-		<!-- компонент -PostForm-->
-		<!-- @create="createPost"  - подписка и отработка события create -->
-		<post-form @create="createPost" />
+		<h1>Страница с постами</h1>
+		<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
+		<my-dialog v-model:show="dialogVisible">
+			<!-- компонент -PostForm-->
+			<!-- @create="createPost"  - подписка и отработка события create -->
+			<post-form @create="createPost" />
+		</my-dialog>
+
 		<!-- компонент -PostList-->
 		<!-- :posts= - привязываем посты к нашему компоненту, в данном случае они улетят как пропсы  -->
 		<!-- "posts" -  и указываем какое зачение мы привязываем в данном случае посты в поле data -->
@@ -29,24 +34,24 @@ export default {
 				{ id: 1, title: 'JavaScript 1', body: 'Описание поста 1' },
 				{ id: 2, title: 'JavaScript 2', body: 'Описание поста 2' },
 				{ id: 3, title: 'JavaScript 3', body: 'Описание поста 3' },
-
 			],
 			//еще 2 модели
 			//title: '',
 			//body: ''
+			dialogVisible: false,
 		}
-
 	},
 	methods: {
 		/* функция обработки кнопки */
 		createPost(post) {
 			//добавляем post в массив posts те мы его от ребенка получили и в массив опракинули
 			this.posts.push(post);
+			this.dialogVisible = false;
 		},
 		//прослушиваем событие remove  с параметром post кот мы опракидывали в emit в postlist
 		removePost(post) {
 			this.posts = this.posts.filter(p => p.id !== post.id)
-		}
+		},
 		/* функция по забору значения из input
 		по-умолчанию параметром эти обработчики получают event
 		inputTitle(event) {
@@ -54,8 +59,10 @@ export default {
 		вместо этой функции пишем сразу в обработчике input:
 		 @input="title=$event.target.value"
 		} */
+		showDialog() {
+			this.dialogVisible = true;
+		}
 	}
-
 }
 </script>
 
@@ -68,5 +75,9 @@ export default {
 
 .app {
 	padding: 20px;
+}
+
+.button__showdialog {
+	margin: 15px 0;
 }
 </style>
