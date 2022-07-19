@@ -2,15 +2,17 @@
 	<!--главный компонент -App-->
 	<div class="app">
 		<h1>Страница с постами</h1>
-		<my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
+		<div class="app__buttons">
+			<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
+			<my-select />
+		</div>
 
-		<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
+		<my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
 		<my-dialog v-model:show="dialogVisible">
 			<!-- компонент -PostForm-->
 			<!-- @create="createPost"  - подписка и отработка события create -->
 			<post-form @create="createPost" />
 		</my-dialog>
-
 		<!-- компонент -PostList-->
 		<!-- :posts= - привязываем посты к нашему компоненту, в данном случае они улетят как пропсы  -->
 		<!-- "posts" -  и указываем какое зачение мы привязываем в данном случае посты в поле data -->
@@ -100,5 +102,10 @@ export default {
 
 .button__showdialog {
 	margin: 15px 0;
+}
+
+.app__buttons {
+	display: flex;
+	justify-content: space-between;
 }
 </style>
