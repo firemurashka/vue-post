@@ -91,6 +91,15 @@ export default {
 	//хук mounted в нем реализуем динамическую подгрузку постов
 	mounted() {
 		this.fetchPosts();
+	},
+	watch: {
+		selectedSort(newValue) {
+			console.log(newValue)
+		},
+		dialogVisible(newValue) {
+			console.log(newValue)
+		},
+
 	}
 }
 </script>

@@ -26,7 +26,6 @@ export default {
 				body: ''
 			}
 		}
-
 	},
 	methods: {
 		/* функция обработки кнопки */
@@ -62,6 +61,17 @@ export default {
 		 @input="title=$event.target.value"
 		} */
 	},
+
+	/*
+	наблюдение за изменениями в объекте
+	 watch: {
+		post: {
+			handler(newVal) {
+				console.log(newVal)
+			},
+			deep: true
+		}
+	} */
 }
 </script>
 
