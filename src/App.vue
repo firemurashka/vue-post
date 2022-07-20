@@ -4,7 +4,7 @@
 		<h1>Страница с постами</h1>
 		<div class="app__buttons">
 			<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
-			<my-select />
+			<my-select v-model="selectedSort" :options="sortOptions" />
 		</div>
 
 		<my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
@@ -42,6 +42,12 @@ export default {
 			//body: ''
 			dialogVisible: false,
 			isPostsLoading: false,
+			selectedSort: '',
+			sortOptions: [
+				{ value: 'title', name: 'По названию' },
+				{ value: 'body', name: 'По описанию' },
+
+			]
 		}
 	},
 	methods: {
@@ -100,12 +106,11 @@ export default {
 	padding: 20px;
 }
 
-.button__showdialog {
-	margin: 15px 0;
-}
 
 .app__buttons {
 	display: flex;
 	justify-content: space-between;
+	margin: 15px 0;
+
 }
 </style>
