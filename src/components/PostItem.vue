@@ -2,6 +2,9 @@
 
 	<div class="post">
 		<div>
+			<div>
+				{{ post.id }}
+			</div>
 			<!-- динамически забираем title у post -->
 			<div> <strong> Название: </strong>{{ post.title }}</div>
 			<div> <strong> Описание: </strong>{{ post.body }}</div>

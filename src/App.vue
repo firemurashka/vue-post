@@ -20,6 +20,16 @@
 		<!-- sortedPosts в компонент поступает отсортированный список -->
 		<post-list @remove="removePost" :posts="sortedAndSearchPosts" v-if="!isPostsLoading" />
 		<div v-else>Идет загрузка...</div>
+		<div ref="observer" class="observer"></div>
+
+		<!-- номера страниц -->
+		<!-- <div class="page__wrapper">
+			<div class="page" @click="changePage(pageNumber)" v-for="pageNumber in totalPages" :key="pageNumber" :class="{
+				'current-page': page === pageNumber
+			}">
+				{{ pageNumber }}
+			</div>
+		</div> -->
 	</div>
 </template>
 
@@ -44,8 +54,16 @@ export default {
 			//body: ''
 			dialogVisible: false,
 			isPostsLoading: false,
+			/* модель для сортировки по постам */
 			selectedSort: '',
+			/* модель для поиска по названию поста */
 			searchQuery: '',
+			/* модель - номер страницы */
+			page: 1,
+			/* модель - число постов на странице */
+			limit: 10,
+			/* модель - число страниц */
+			totalPages: 0,
 			sortOptions: [
 				{ value: 'title', name: 'По названию' },
 				{ value: 'body', name: 'По описанию' },
@@ -74,14 +92,49 @@ export default {
 		showDialog() {
 			this.dialogVisible = true;
 		},
+
+		/* смена страницы и подгружение страниц 
+		changePage(pageNumber) {
+			this.page = pageNumber
+			this.fetchPosts()
+		},
+		*/
 		async fetchPosts() {
 			try {
 				this.isPostsLoading = true;
 				//setTimeout - задержка показа постов 
 				setTimeout(async () => {
 					//делаем запрос на сервер и ответ помешаем в переменную response
-					const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+					const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+						params: {
+							_page: this.page,
+							_limit: this.limit
+						}
+					});
+					this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
 					this.posts = response.data;
+					this.isPostsLoading = false;
+				}, 1000);
+
+			} catch (e) {
+				//если произошла ошибка будем выводить в alert
+				alert('Ошибка')
+			}
+		},
+		async loadMorePosts() {
+			try {
+				this.page += 1;
+				//setTimeout - задержка показа постов 
+				setTimeout(async () => {
+					//делаем запрос на сервер и ответ помешаем в переменную response
+					const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+						params: {
+							_page: this.page,
+							_limit: this.limit
+						}
+					});
+					this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
+					this.posts = [...this.posts, ...response.data];
 					this.isPostsLoading = false;
 				}, 1000);
 
@@ -94,6 +147,18 @@ export default {
 	//хук mounted в нем реализуем динамическую подгрузку постов
 	mounted() {
 		this.fetchPosts();
+		console.log(this.$refs.observer);
+		const options = {
+			rootMargin: '0px',
+			threshold: 1.0
+		}
+		const callback = (entries) => {
+			if (entries[0].isIntersecting && this.page < this.totalPages) {
+				this.loadMorePosts()
+			}
+		};
+		const observer = new IntersectionObserver(callback, options);
+		observer.observe(this.$refs.observer);
 	},
 	//сортировка постов с помощью computed
 	computed: {
@@ -127,11 +192,29 @@ export default {
 	padding: 20px;
 }
 
-
 .app__buttons {
 	display: flex;
 	justify-content: space-between;
 	margin: 15px 0;
+}
+
+.page__wrapper {
+	display: flex;
+	margin-top: 15px;
+}
+
+.page {
+	border: 1px solid #000;
+	padding: 10px;
+}
+
+.current-page {
+	border: 2px solid teal;
+}
+
+.observer {
+	height: 30px;
+	background-color: green;
 
 }
 </style>
