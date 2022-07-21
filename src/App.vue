@@ -16,7 +16,8 @@
 		<!-- компонент -PostList-->
 		<!-- :posts= - привязываем посты к нашему компоненту, в данном случае они улетят как пропсы  -->
 		<!-- "posts" -  и указываем какое зачение мы привязываем в данном случае посты в поле data -->
-		<post-list @remove="removePost" :posts="posts" v-if="!isPostsLoading" />
+		<!-- sortedPosts в компонент поступает отсортированный список -->
+		<post-list @remove="removePost" :posts="sortedPosts" v-if="!isPostsLoading" />
 		<div v-else>Идет загрузка...</div>
 	</div>
 </template>
@@ -92,16 +93,22 @@ export default {
 	mounted() {
 		this.fetchPosts();
 	},
+	//сортировка постов с помощью computed
+	computed: {
+		sortedPosts() {
+			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+		},
+	},
+	/* сортировка watch
 	watch: {
 		selectedSort(newValue) {
 			this.posts.sort((post1, post2) => {
 				return post1[newValue]?.localeCompare(post2[newValue])
 			})
 		},
-
-
-	}
+	} */
 }
+
 </script>
 
 <style>
