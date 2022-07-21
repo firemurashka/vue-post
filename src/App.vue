@@ -2,6 +2,7 @@
 	<!--главный компонент -App-->
 	<div class="app">
 		<h1>Страница с постами</h1>
+		<my-input v-model="searchQuery" placeholder="Поиск...." />
 		<div class="app__buttons">
 			<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
 			<my-select v-model="selectedSort" :options="sortOptions" />
@@ -17,7 +18,7 @@
 		<!-- :posts= - привязываем посты к нашему компоненту, в данном случае они улетят как пропсы  -->
 		<!-- "posts" -  и указываем какое зачение мы привязываем в данном случае посты в поле data -->
 		<!-- sortedPosts в компонент поступает отсортированный список -->
-		<post-list @remove="removePost" :posts="sortedPosts" v-if="!isPostsLoading" />
+		<post-list @remove="removePost" :posts="sortedAndSearchPosts" v-if="!isPostsLoading" />
 		<div v-else>Идет загрузка...</div>
 	</div>
 </template>
@@ -44,6 +45,7 @@ export default {
 			dialogVisible: false,
 			isPostsLoading: false,
 			selectedSort: '',
+			searchQuery: '',
 			sortOptions: [
 				{ value: 'title', name: 'По названию' },
 				{ value: 'body', name: 'По описанию' },
@@ -97,6 +99,9 @@ export default {
 	computed: {
 		sortedPosts() {
 			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+		},
+		sortedAndSearchPosts() {
+			return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
 		},
 	},
 	/* сортировка watch
