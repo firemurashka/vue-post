@@ -5,6 +5,7 @@ import {
 } from "vue-router";
 import PostPage from "@/pages/PostPage";
 import AboutPage from "@/pages/AboutPage";
+import PostIdPage from "@/pages/PostIdPage";
 
 const routes = [{
         path: '/',
@@ -17,6 +18,10 @@ const routes = [{
     {
         path: '/about',
         component: AboutPage
+    },
+    {
+        path: '/posts/:id',
+        component: PostIdPage
     },
 ]
 

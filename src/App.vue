@@ -1,4 +1,6 @@
 <template>
+	<my-navbar></my-navbar>
+
 	<!--главный компонент -App-->
 	<div class="app">
 		<router-view></router-view>
@@ -6,8 +8,13 @@
 </template>
 
 <script>
+import MyNavbar from "@/components/MyNavbar";
 
-
+export default {
+	components: {
+		MyNavbar
+	}
+}
 </script>
 
 <style>
