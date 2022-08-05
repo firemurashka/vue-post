@@ -1,5 +1,8 @@
+<!-- MyButton.vue - переиспользуемый компонент MyButton-->
+
 <template>
 	<button class="btn">
+		<!-- все что мы будем добавлять в my-button - будет попадать в  slot-->
 		<slot></slot>
 	</button>
 </template>

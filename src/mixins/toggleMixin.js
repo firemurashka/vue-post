@@ -1,3 +1,5 @@
+/* mixins-toggleMixin.js миксин- примеси */
+
 export default {
     props: {
         show: {
@@ -13,5 +15,4 @@ export default {
     mounted() {
         console.log('mixin mounted');
     }
-
 }

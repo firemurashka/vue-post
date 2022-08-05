@@ -1,5 +1,6 @@
-<template>
+<!-- PostItem.vue - компонент PostItem пост-->
 
+<template>
 	<div class="post">
 		<div>
 			<div>
@@ -15,7 +16,6 @@
 			<!-- отдаем post наверх -->
 			<my-button @click="$emit('remove', post)"> Удалить
 			</my-button>
-
 		</div>
 	</div>
 </template>
@@ -45,10 +45,9 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
 
-	.post__btns {
-		display: flex;
-	}
-
+.post__btns {
+	display: flex;
 }
 </style>

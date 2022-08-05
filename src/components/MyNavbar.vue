@@ -1,3 +1,5 @@
+<!-- MyNavbar.vue - компонент-->
+
 <template>
 	<div class="navbar">
 		<div @click="$router.push('/')">Vue 3</div>

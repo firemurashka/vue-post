@@ -1,6 +1,8 @@
+<!-- App.vue - главный компонент - точка входа -->
+
+<!-- template - разметка страницы - структура нашего компонента -->
 <template>
 	<my-navbar></my-navbar>
-
 	<!--главный компонент -App-->
 	<div class="app">
 		<router-view></router-view>
@@ -8,6 +10,7 @@
 </template>
 
 <script>
+/* импорт компонента MyNavbar */
 import MyNavbar from "@/components/MyNavbar";
 
 export default {

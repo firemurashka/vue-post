@@ -1,3 +1,5 @@
+<!-- PostForm.vue - компонент с формой создания поста-->
+
 <template>
 	<!-- @submit.prevent отмена стандартного поведения браузера - перезагрузки (prevent-модификатор)-->
 	<form @submit.prevent>
@@ -12,7 +14,6 @@
 		<!-- обработчик события кнопки и вызов функции createPost -->
 		<my-button class="btn__post" @click="createPost"> Создать </my-button>
 	</form>
-
 </template>
 
 <script>

@@ -1,3 +1,6 @@
+/* router - router.js */
+
+
 import MainPage from "@/pages/MainPage";
 import {
     createRouter,

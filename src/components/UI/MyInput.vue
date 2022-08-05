@@ -1,8 +1,9 @@
+<!-- MyInput.vue - переиспользуемый компонент MyInput -->
+
 <template>
 	<!-- присоединяем к input нашу modelValue с помощью v-bind, v-on - вешаем обработчик события input-->
 	<input class="input" :value="modelValue" @input="updateInput" type="text">
 </template>
-
 
 <script>
 export default {

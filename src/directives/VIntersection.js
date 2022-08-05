@@ -1,3 +1,5 @@
+/*directives - VIntersection.js - директива VIntersection*/
+
 export default {
     mounted(el, binding) {
         /* код отвечает за отслеживание - пересечение какого-то элемента */

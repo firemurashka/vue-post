@@ -1,3 +1,5 @@
+<!-- PostList.vue  - компонент со списом постов-->
+
 <template>
 	<div class="post__list">
 		<!-- условная отрисовка v-if -->
@@ -10,7 +12,6 @@
 				<!-- отдаем post наверх -->
 				<!-- remove - событие, отдаем событие наверх-->
 				<post-item v-for="post in posts" :key="post.id" @remove="$emit('remove', post)" :post="post" />
-
 			</transition-group>
 		</div>
 		<h2 v-else style="color:blue">Список пользователей пуст</h2>

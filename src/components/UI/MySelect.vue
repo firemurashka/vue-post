@@ -1,3 +1,5 @@
+<!-- MySelect.vue - переиспользуемый компонент MySelect -->
+
 <template>
 	<!-- двухстороннее связывание -->
 	<!-- директива  v-model - передаем  modelValue -->
@@ -9,7 +11,6 @@
 		<option v-for="option in options" :key="option.value" :value="option.value">
 			{{ option.name }}
 		</option>
-
 	</select>
 </template>
 
@@ -35,8 +36,6 @@ export default {
 	}
 }
 </script>
-
-
 
 <style>
 </style>

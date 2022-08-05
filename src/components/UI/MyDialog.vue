@@ -1,3 +1,5 @@
+<!-- MyDialog.vue - - переиспользуемый компонент MyDialog-->
+
 <template>
 	<!-- если show = true? то диалоговое окно будет видно -->
 	<div class="dialog" v-if="show" @click.stop="hideDialog">
