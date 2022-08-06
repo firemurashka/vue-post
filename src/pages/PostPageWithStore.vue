@@ -3,9 +3,13 @@
 
 <template>
 	<div>
+		<h1>{{ $store.state.isAuth ? "Пользователь авторизован" : "Авторизируйтесь, чтобы использовать сервис" }}</h1>
+
 		<h1>{{ $store.getters.doubleLikes }}</h1>
-		<my-button @click="$store.commit('incrementLikes')"> likes </my-button>
-		<my-button @click="$store.commit('decrementLikes')"> dislikes </my-button>
+		<div>
+			<my-button @click="$store.commit('incrementLikes')"> likes </my-button>
+			<my-button @click="$store.commit('decrementLikes')"> dislikes </my-button>
+		</div>
 
 		<h1>Страница с постами</h1>
 		<my-input v-focus v-model="searchQuery" placeholder="Поиск...." />
