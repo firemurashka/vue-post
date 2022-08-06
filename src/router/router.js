@@ -9,6 +9,7 @@ import {
 import PostPage from "@/pages/PostPage";
 import AboutPage from "@/pages/AboutPage";
 import PostIdPage from "@/pages/PostIdPage";
+import PostPageWithStore from "@/pages/PostPageWithStore";
 
 const routes = [{
         path: '/',
@@ -25,6 +26,12 @@ const routes = [{
     {
         path: '/posts/:id',
         component: PostIdPage
+    },
+    /* путь к странице где используем vuex */
+    /* vuex - библиотека управления состояния */
+    {
+        path: '/store',
+        component: PostPageWithStore
     },
 ]
 

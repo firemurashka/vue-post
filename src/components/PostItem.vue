@@ -3,6 +3,7 @@
 <template>
 	<div class="post">
 		<div>
+			<!-- likes={{ $store.state.likes }} глобальный доступ к хранилищу -->
 			<div>
 				{{ post.id }}
 			</div>

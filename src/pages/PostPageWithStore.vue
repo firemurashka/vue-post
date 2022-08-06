@@ -3,6 +3,10 @@
 
 <template>
 	<div>
+		<h1>{{ $store.getters.doubleLikes }}</h1>
+		<my-button @click="$store.commit('incrementLikes')"> likes </my-button>
+		<my-button @click="$store.commit('decrementLikes')"> dislikes </my-button>
+
 		<h1>Страница с постами</h1>
 		<my-input v-focus v-model="searchQuery" placeholder="Поиск...." />
 		<div class="app__buttons">

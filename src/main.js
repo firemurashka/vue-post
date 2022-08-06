@@ -12,6 +12,7 @@ import components from '@/components/UI';
 import router from "@/router/router";
 /* импорт директивы отслеживания */
 import directives from '@/directives';
+import store from "@/store";
 
 /* createApp - функция  */
 const app = createApp(App)
@@ -31,4 +32,5 @@ directives.forEach(directive => {
     /* mount - монтирование приложения  */
 app
     .use(router)
+    .use(store)
     .mount('#app');
