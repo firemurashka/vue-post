@@ -2,30 +2,22 @@
 import {
     createStore
 } from "vuex";
+import {
+    postModule
+} from "./postModule";
 export default createStore({
 
     /* данные */
-    state: {
-        likes: 2
-
-    },
+    state: {},
 
     /* компьютед св-ва, кэшируемые - вычисляемые значения */
     getters: {
-        /* функция увеличения лайков */
-        doubleLikes(state) {
-            return state.likes * 2
-        }
+
     },
 
     /* функции внутри которой мы меняем значение поля состояния */
     mutations: {
-        incrementLikes(state) {
-            state.likes += 1
-        },
-        decrementLikes(state) {
-            state.likes -= 1
-        }
+
     },
 
     /* внутри сея испл мутации */
@@ -33,7 +25,7 @@ export default createStore({
 
     },
     modules: {
-
+        post: postModule
     }
 
 
