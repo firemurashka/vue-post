@@ -36,7 +36,7 @@ export const postModule = {
     /* компьютед св-ва, кэшируемые - вычисляемые значения */
     getters: {
         sortedPosts(state) {
-            return [...state.posts].sort((post1, post2) => post1[state.selectedSort].localeCompare(post2[state.selectedSort]))
+            return [...state.posts].sort((post1, post2) => post1[state.selectedSort] ?.localeCompare(post2[state.selectedSort]))
         },
         sortedAndSearchPosts(state, getters) {
             return getters.sortedPosts.filter(post => post.title.toLowerCase().includes(state.searchQuery.toLowerCase()))
@@ -88,7 +88,8 @@ export const postModule = {
                 //  this.isPostsLoading = false;
             } catch (e) {
                 //если произошла ошибка будем выводить в alert
-                alert('Ошибка')
+
+                console.log(e);
             } finally {
                 commit('setLoading', false);
             }
@@ -114,13 +115,14 @@ export const postModule = {
 
             } catch (e) {
                 //если произошла ошибка будем выводить в alert
-                alert('Ошибка')
+                console.log(e);
             }
         }
     },
     modules: {
 
-    }
+    },
+    namespaced: true
 
 
 }

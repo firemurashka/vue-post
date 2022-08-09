@@ -1,58 +1,89 @@
 <!-- PostPage.vue - страница с постами -->
 
-
 <template>
-	<div>
-		<h1>{{ $store.state.post.limit }}</h1>
+  <div>
+    <h1>Страница с постами</h1>
 
-		<!-- <h1>Страница с постами</h1>
-		<my-input v-focus v-model="searchQuery" placeholder="Поиск...." />
-		<div class="app__buttons">
-			<my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
-			<my-select v-model="selectedSort" :options="sortOptions" />
-		</div>
-		<my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
-		<my-dialog v-model:show="dialogVisible">
-			<post-form @create="createPost" />
-		</my-dialog>
-		<post-list @remove="removePost" :posts="sortedAndSearchPosts" v-if="!isPostsLoading" />
-		<div v-else>Идет загрузка...</div>
-		<div v-intersection="loadMorePosts" class="observer"></div>
+    <!-- 		<my-input v-focus v-model="searchQuery" placeholder="Поиск...." />
  -->
-	</div>
+    <div class="app__buttons">
+      <my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
+      <!-- 			<my-select v-model="selectedSort" :options="sortOptions" />
+ -->
+    </div>
+
+    <my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
+    <my-dialog v-model:show="dialogVisible">
+      <post-form @create="createPost" />
+    </my-dialog>
+
+    <post-list
+      @remove="removePost"
+      :posts="sortedAndSearchPosts"
+      v-if="!isPostsLoading"
+    />
+    <div v-else>Идет загрузка...</div>
+    <div v-intersection="loadMorePosts" class="observer"></div>
+  </div>
 </template>
 
 <script>
 /* импортирование компонентов */
-//import PostList from "@/components/PostList";
-//import PostForm from "@/components/PostForm";
+import PostList from "@/components/PostList";
+import PostForm from "@/components/PostForm";
+import MyButton from "@/components/UI/MyButton";
+/* import MySelect from "@/components/UI/MySelect";
+import MyInput from "@/components/UI/MyInput"; */
+
 /* импорт библиотеки для хапросов с сервера axios*/
-//import axios from 'axios';
+/* import axios from "axios";
+ *//* импорт функции */
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
-	/* регистрация компонентов в поле components */
-	components: {
-
-	},
-	data() {
-		return {
-
-			dialogVisible: false,
-
-		}
-	},
-	methods: {
-
-	},
-	//хук mounted в нем реализуем динамическую подгрузку постов
-	mounted() {
-
-	},
-	//сортировка постов с помощью computed
-	computed: {
-
-	},
-	/* сортировка watch
+  /* регистрация компонентов в поле components */
+  components: {
+    MyButton,
+   /*  MySelect,
+    MyInput, */
+    PostList,
+    PostForm,
+	/*  axios */
+  },
+  data() {
+    return {
+      dialogVisible: false,
+    };
+  },
+  methods: {
+    ...mapMutations({
+      setPage: "post/setPage",
+    }),
+    ...mapActions({
+      loadMorePosts: "post/loadMorePosts",
+      fetchPosts: "post/fetchPosts",
+    }),
+  },
+  //хук mounted в нем реализуем динамическую подгрузку постов
+  mounted() {},
+  //сортировка постов с помощью computed
+  computed: {
+    ...mapState({
+      posts: (state) => state.post.posts,
+      isPostsLoading: (state) => state.post.isPostsLoading,
+      selectedSort: (state) => state.post.selectedSort,
+      searchQuery: (state) => state.post.searchQuery,
+      page: (state) => state.post.page,
+      limit: (state) => state.post.limit,
+      totalPages: (state) => state.post.totalPages,
+      sortOptions: (state) => state.post.sortOptions,
+    }),
+    ...mapGetters({
+      sortedPosts: "post/sortedPosts",
+      sortedAndSearchPosts: "post/sortedAndSearchPosts",
+    }),
+  },
+  /* сортировка watch
 	watch: {
 		selectedSort(newValue) {
 			this.posts.sort((post1, post2) => {
@@ -60,34 +91,32 @@ export default {
 			})
 		},
 	} */
-}
-
+};
 </script>
 
 <style>
 .app__buttons {
-	display: flex;
-	justify-content: space-between;
-	margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
 }
 
 .page__wrapper {
-	display: flex;
-	margin-top: 15px;
+  display: flex;
+  margin-top: 15px;
 }
 
 .page {
-	border: 1px solid #000;
-	padding: 10px;
+  border: 1px solid #000;
+  padding: 10px;
 }
 
 .current-page {
-	border: 2px solid teal;
+  border: 2px solid teal;
 }
 
 .observer {
-	height: 30px;
-	background-color: green;
-
+  height: 30px;
+  background-color: green;
 }
 </style>
