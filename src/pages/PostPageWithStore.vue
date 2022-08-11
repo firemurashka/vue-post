@@ -4,12 +4,23 @@
   <div>
     <h1>Страница с постами</h1>
 
-    <!-- 		<my-input v-focus v-model="searchQuery" placeholder="Поиск...." />
- -->
+  <my-input
+      :model-value="searchQuery"
+      @update:model-value="setSearchQuery"
+      placeholder="Поиск...."
+      v-focus
+    />
+
+
     <div class="app__buttons">
       <my-button class="button__showdialog" @click="showDialog"> Создать пост </my-button>
-      <!-- 			<my-select v-model="selectedSort" :options="sortOptions" />
- -->
+  
+      <my-select
+        :model-value="setSelectedSort"
+        @update:model-value="setSelectedSort"
+        :options="sortOptions"
+      />
+
     </div>
 
     <my-button class="button__showdialog" @click="fetchPosts"> Получить посты </my-button>
@@ -58,6 +69,8 @@ export default {
   methods: {
     ...mapMutations({
       setPage: "post/setPage",
+		   setSearchQuery: "post/setSearchQuery",
+      setSelectedSort: "post/setSelectedSort",
     }),
     ...mapActions({
       loadMorePosts: "post/loadMorePosts",
@@ -65,7 +78,8 @@ export default {
     }),
   },
   //хук mounted в нем реализуем динамическую подгрузку постов
-  mounted() {},
+  mounted() {    this.fetchPosts();
+},
   //сортировка постов с помощью computed
   computed: {
     ...mapState({
